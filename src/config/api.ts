@@ -1,1 +1,1 @@
-export const BASE_URL = "https://makeform-be.onrender.com/";
+export const BASE_URL = "https://makeform-be.onrender.com";
