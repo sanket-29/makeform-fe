@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Lock } from "lucide-react";
 import { isAuthenticated, getUserType } from "@/src/utils/auth";
+import { BASE_URL } from "@/config/api";
 
 export default function AdminLoginPage() {
   const [form, setForm] = useState({
@@ -58,7 +59,7 @@ export default function AdminLoginPage() {
       setError("");
       setMessage("");
 
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +92,7 @@ export default function AdminLoginPage() {
       setLoading(true);
       setError("");
 
-      const res = await fetch("http://localhost:5000/api/auth/verify-otp", {
+      const res = await fetch(`${BASE_URL}/api/auth/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
