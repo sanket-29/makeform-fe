@@ -1,0 +1,24 @@
+stages:
+  - deploy
+
+deploy_job:
+  stage: deploy
+  tags:
+    - makeform-fe
+  script:
+    - echo "=== Pulling latest code ==="
+    - cd /var/www/html/makeform-fe/
+    - git clean -d -f .
+    - git pull origin main
+    - echo "=== Installing dependencies ==="
+    - npm i --legacy-peer-deps
+    - echo "=== Building ==="
+    - rm -rf .next
+    - npm run build
+    - echo "=== Restarting app ==="
+    - npx pm2 stop makeform-fe || true
+    - npx pm2 delete makeform-fe || true
+    - npx pm2 start npm --name "makeform-fe" -- run start -- -p 3001
+
+  only:
+    - main
