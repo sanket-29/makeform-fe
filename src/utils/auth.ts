@@ -41,7 +41,7 @@ export const loginAdmin = async (username: string, password: string) => {
 
 export const loginUser = async (email: string, password: string) => {
   try {
-    const res = await fetch("http://localhost:5000/api/user/login", {
+    const res = await fetch(`${BASE_URL}/api/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export const loginUser = async (email: string, password: string) => {
 
 export const registerUser = async (name: string, email: string, password: string) => {
   try {
-    const res = await fetch("http://localhost:5000/api/user/register", {
+    const res = await fetch(`${BASE_URL}/api/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +131,7 @@ export const fetchUserProfile = async () => {
     throw new Error("No authentication token available");
   }
 
-  const res = await fetch("http://localhost:5000/api/user/profile", {
+  const res = await fetch(`${BASE_URL}/api/user/profile`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
