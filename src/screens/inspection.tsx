@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import TabButton from "../components/tab-button";
+import { BASE_URL } from "@/src/config/api";
 
 type ScheduleType = {
   _id: string;
@@ -98,7 +99,7 @@ function ScheduleForm({ applicationId }: { applicationId: string; onSubmit?: () 
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/inspection/schedule", {
+      const res = await fetch(`${BASE_URL}/api/inspection/schedule`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -213,7 +214,7 @@ function HistoryTab({ applicationId }: { applicationId: string }) {
   const [data, setData] = useState<ScheduleType[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/inspection/schedule?applicationId=${applicationId}`)
+    fetch(`${BASE_URL}/api/inspection/schedule?applicationId=${applicationId}`)
       .then((res) => res.json())
       .then(setData);
   }, [applicationId]);
@@ -279,7 +280,7 @@ function InspectionsTab({ applicationId }: { applicationId: string }) {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/inspection/schedule?applicationId=${applicationId}`)
+    fetch(`${BASE_URL}/api/inspection/schedule?applicationId=${applicationId}`)
       .then((res) => res.json())
       .then((data: ScheduleType[]) => {
         setSchedules(data.filter((item) => item.status !== "Completed"));
@@ -289,7 +290,7 @@ function InspectionsTab({ applicationId }: { applicationId: string }) {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/inspection/inspection", {
+      const res = await fetch(`${BASE_URL}/api/inspection/inspection`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -456,7 +457,7 @@ function InspectionHistoryTab({ applicationId }: { applicationId: string }) {
   const [data, setData] = useState<InspectionType[]>([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/inspection/inspection?applicationId=${applicationId}`)
+    fetch(`${BASE_URL}/api/inspection/inspection?applicationId=${applicationId}`)
       .then((res) => res.json())
       .then(setData);
   }, [applicationId]);

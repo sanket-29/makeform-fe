@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Printer, X } from "lucide-react";
+import { BASE_URL } from "@/src/config/api";
 
 type Message = {
   _id: string;
@@ -26,7 +27,7 @@ export default function Chat({
 
     const fetchMessages = async () => {
       const res = await fetch(
-        `http://localhost:5000/api/chat/${applicationId}`
+        `${BASE_URL}/api/chat/${applicationId}`
       );
       const data = await res.json();
       setMessages(data);
@@ -39,7 +40,7 @@ export default function Chat({
   const sendMessage = async () => {
     if (!input.trim()) return;
 
-    const res = await fetch("http://localhost:5000/api/chat/send", {
+    const res = await fetch(`${BASE_URL}/api/chat/send`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

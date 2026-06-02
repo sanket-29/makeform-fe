@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ChevronDown, Paperclip } from "lucide-react";
+import { BASE_URL } from "@/src/config/api";
 import TabButton from "../components/tab-button";
 
 type HistoryItem = {
@@ -89,7 +90,7 @@ const toggleDepartment = (dept: string) => {
     if (!applicationId) return;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/signoffs/${applicationId}`
+        `${BASE_URL}/api/signoffs/${applicationId}`
       );
       const data = await res.json();
 
@@ -123,7 +124,7 @@ const handleSubmit = async () => {
   const currentSelection = [...selectedDepartments];
 
   try {
-    await fetch("http://localhost:5000/api/signoffs/assign", {
+    await fetch(`${BASE_URL}/api/signoffs/assign`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -175,7 +176,7 @@ const handleSubmitResult = async () => {
   setErrors({});
 
   try {
-    await fetch("http://localhost:5000/api/signoffs/update", {
+    await fetch(`${BASE_URL}/api/signoffs/update`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

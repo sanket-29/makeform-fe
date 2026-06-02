@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import TabButton from "../components/tab-button";
 import { Download } from "lucide-react";
+import { BASE_URL } from '@/src/config/api';
 
 export default function Attachments({
   applicationId,
@@ -101,7 +102,7 @@ const handleSubmit = async () => {
 
   formData.append("applicationId", applicationId);
 
-  await fetch("http://localhost:5000/api/attachments/upload", {
+  await fetch(`${BASE_URL}/api/attachments/upload`, {
     method: "POST",
     body: formData,
   });
@@ -210,7 +211,7 @@ function FilesTab({ applicationId }: { applicationId: string }) {
   const fetchFiles = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/attachments/${applicationId}`
+        `${BASE_URL}/api/attachments/${applicationId}`
       );
       const data = await res.json();
       setFiles(data);
@@ -221,7 +222,7 @@ function FilesTab({ applicationId }: { applicationId: string }) {
 
   const handleDelete = async (id: string) => {
   try {
-    await fetch(`http://localhost:5000/api/attachments/${id}`, {
+    await fetch(`${BASE_URL}/api/attachments/${id}`, {
       method: "DELETE",
     });
 
@@ -314,7 +315,7 @@ function FilesTab({ applicationId }: { applicationId: string }) {
                 onClick={async () => {
                   try {
                     const response = await fetch(
-                      `http://localhost:5000/${selectedFile.filePath}`
+                      `${BASE_URL}/${selectedFile.filePath}`
                     );
                     const blob = await response.blob();
 
@@ -342,7 +343,7 @@ function FilesTab({ applicationId }: { applicationId: string }) {
             {/* IMAGE */}
             <div className="flex justify-center">
               <img
-                src={`http://localhost:5000/${selectedFile.filePath}`}
+                src={`${BASE_URL}/${selectedFile.filePath}`}
                 alt="preview"
                 className="max-h-[400px] object-contain"
               />

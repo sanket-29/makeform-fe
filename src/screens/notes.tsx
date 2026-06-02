@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import TabButton from "../components/tab-button";
+import { BASE_URL } from "@/src/config/api";
 
 
 type Props = {
@@ -83,8 +84,8 @@ const handleSubmit = async () => {
     // ✏️ UPDATE EXISTING NOTE
     if (editId) {
       const res = await fetch(
-        `http://localhost:5000/api/notes/${editId}`,
-        {
+        `${BASE_URL}/api/notes/${editId}`,
+          {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -107,7 +108,7 @@ const handleSubmit = async () => {
       showMessage("Updated successfully");
     } else {
       // CREATE NEW NOTE
-      const res = await fetch("http://localhost:5000/api/notes", {
+      const res = await fetch(`${BASE_URL}/api/notes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -229,7 +230,7 @@ function PreviousNotesTab({ applicationId }: Props) {
 
   const fetchNotes = async () => {
     const res = await fetch(
-      `http://localhost:5000/api/notes/${applicationId}`
+      `${BASE_URL}/api/notes/${applicationId}`
     );
     const data = await res.json();
     setNotes(data);
@@ -237,7 +238,7 @@ function PreviousNotesTab({ applicationId }: Props) {
 
   const handleDelete = async (id: string) => {
     try {
-      await fetch(`http://localhost:5000/api/notes/${id}`, {
+      await fetch(`${BASE_URL}/api/notes/${id}`, {
         method: "DELETE",
       });
 

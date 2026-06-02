@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { BASE_URL } from "@/src/config/api";
 
 type User = {
     _id: string;
@@ -17,7 +18,7 @@ export default function LinkUser({ applicationId }: { applicationId: string }) {
 
     // 🔥 FETCH USERS
     const fetchUsers = async () => {
-        const res = await fetch("http://localhost:5000/api/user");
+        const res = await fetch(`${BASE_URL}/api/user`);
         const data = await res.json();
         setUsers(data);
     };
@@ -25,7 +26,7 @@ export default function LinkUser({ applicationId }: { applicationId: string }) {
     // 🔥 FETCH LINKED USER
     const fetchLinkedUser = async () => {
         const res = await fetch(
-            `http://localhost:5000/api/link-user/${applicationId}`
+            `${BASE_URL}/api/link-user/${applicationId}`
         );
         const data = await res.json();
         setLinkedUserId(data.userId);
@@ -44,7 +45,7 @@ export default function LinkUser({ applicationId }: { applicationId: string }) {
 
         if (!confirm) return;
 
-        await fetch("http://localhost:5000/api/link-user/link", {
+        await fetch(`${BASE_URL}/api/link-user/link`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { isAuthenticated, isAdmin } from "@/src/utils/auth";
+import { BASE_URL } from "@/src/config/api";
 import DashboardLayout from "@/src/components/dashboard-layout";
 import MidLayout from "@/src/components/mid-layout";
 import RightPanel from "@/src/components/right-panel";
@@ -25,7 +26,7 @@ export default function DashboardPage() {
       return;
     }
 
-    fetch("http://localhost:5000/api/form/getForms", {
+    fetch(`${BASE_URL}/api/form/getForms`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

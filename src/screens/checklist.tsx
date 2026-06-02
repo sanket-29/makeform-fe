@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { BASE_URL } from "@/src/config/api";
 import { CheckCircle, Trash2, Paperclip } from "lucide-react";
 
 type Task = {
@@ -47,7 +48,7 @@ export default function Checklist({ applicationId }: Props) {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/checklist/${applicationId}`
+        `${BASE_URL}/api/checklist/${applicationId}`
       );
       const data = await res.json();
 
@@ -147,7 +148,7 @@ export default function Checklist({ applicationId }: Props) {
 
     if (!item || !checklistId) return;
 
-    await fetch("http://localhost:5000/api/checklist/verify", {
+    await fetch(`${BASE_URL}/api/checklist/verify`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -193,7 +194,7 @@ export default function Checklist({ applicationId }: Props) {
       );
 
       const res = await fetch(
-        "http://localhost:5000/api/checklist/submit",
+        `${BASE_URL}/api/checklist/submit`,
         {
           method: "POST",
           headers: {
@@ -212,7 +213,7 @@ export default function Checklist({ applicationId }: Props) {
     }
     else if (hasVerified) {
 
-      await fetch("http://localhost:5000/api/checklist/finalize", {
+      await fetch(`${BASE_URL}/api/checklist/finalize`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

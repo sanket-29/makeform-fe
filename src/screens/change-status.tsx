@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { BASE_URL } from "@/src/config/api";
 
 interface ApplicationForm {
   _id: string;
@@ -54,7 +55,7 @@ export default function ChangeStatus({
     // Otherwise fetch from API
     const fetchStatus = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/form/getForms`, {
+        const res = await fetch(`${BASE_URL}/api/form/getForms`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -85,7 +86,7 @@ export default function ChangeStatus({
   // API call function for updating status
   const updateApplicationStatus = async (id: string, status: string) => {
     const response = await fetch(
-      `http://localhost:5000/api/form/application/${id}/status`,
+      `${BASE_URL}/api/form/application/${id}/status`,
       {
         method: "POST", // Use POST as per your backend
         headers: {

@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import TabButton from "../components/tab-button";
+import { BASE_URL } from "@/src/config/api";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/fees";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || `${BASE_URL}/api/fees`;
 
 type FeeItem = {
   name: string;

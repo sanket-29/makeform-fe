@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import OwnerConfirmationModal from "../components/OwnerConfirmationModal";
 import FeeCalculatedModal from "../components/FeeCalculatedModal";
 import CslConfirmationModal from "../components/CslConfirmationModal";
+import { BASE_URL } from "@/src/config/api";
 
 // Application data interface (based on backend model)
 interface ApplicationData {
@@ -158,7 +159,7 @@ export default function SendEmail({ applicationId }: { applicationId: string }) 
       console.log("[SendEmail] applicationId:", applicationId);
       if (!applicationId) return;
       try {
-        const url = `http://localhost:5000/api/form/application/${applicationId}`;
+        const url = `${BASE_URL}/api/form/application/${applicationId}`;
         console.log("[SendEmail] Fetching:", url);
         const response = await fetch(url);
         const result = await response.json();
@@ -199,7 +200,7 @@ export default function SendEmail({ applicationId }: { applicationId: string }) 
   // Handler for sending mail via server API
   const handleSendServer = async (emailData: { to: string; cc?: string; subject: string; message: string }) => {
     try {
-      const response = await fetch("http://localhost:5000/api/email/send", {
+      const response = await fetch(`${BASE_URL}/api/email/send`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

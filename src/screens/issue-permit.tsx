@@ -6,6 +6,7 @@ import TabButton from "../components/tab-button";
 import PermitPrint from "../components/permit-print";
 import PermitPrint2 from "../components/permit-print2";
 import { RootState } from "../redux/store/store";
+import { BASE_URL } from "@/src/config/api";
 
 
 type PermitData = {
@@ -70,7 +71,7 @@ export default function IssuePermit( ) {
   // ✅ SUBMIT API
   const handleSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/permit/save", {
+      const res = await fetch(`${BASE_URL}/api/permit/save`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +119,7 @@ export default function IssuePermit( ) {
   const fetchPermitData = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/permit/${applicationId}`,
+        `${BASE_URL}/api/permit/${applicationId}`,
       );
 
       const data = await res.json();

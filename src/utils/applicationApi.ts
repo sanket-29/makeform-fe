@@ -1,6 +1,7 @@
 import { getToken } from './auth';
+import { BASE_URL } from '@/src/config/api';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/user';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || `${BASE_URL}/api/user`;
 
 const postJson = async (path: string, body: object) => {
   const token = getToken();

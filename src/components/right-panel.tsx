@@ -18,6 +18,7 @@ import {
 import ToolIcon from "./tools-icon";
 import ActionButtons from "./right-action-buttons";
 import { useState, useEffect } from "react"; // ✅ added
+import { BASE_URL } from "@/src/config/api";
 import SignOffs from "../screens/signoff";
 import Checklist from "../screens/checklist";
 import PayFee from "../screens/payfee";
@@ -67,7 +68,7 @@ export default function RightPanel({ activeId, forms, onFormsUpdate }: { activeI
     const fetchProgress = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/transactions/${activeId}`
+          `${BASE_URL}/api/transactions/${activeId}`
         );
 
         const data = await res.json();
@@ -97,7 +98,7 @@ export default function RightPanel({ activeId, forms, onFormsUpdate }: { activeI
     const fetchLinkedUser = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/link-user/${activeId}`
+          `${BASE_URL}/api/link-user/${activeId}`
         );
         const data = await res.json();
 
@@ -118,7 +119,7 @@ export default function RightPanel({ activeId, forms, onFormsUpdate }: { activeI
       setIsDeleting(true);
 
       const res = await fetch(
-        `http://localhost:5000/api/form/delete/${activeId}`,
+        `${BASE_URL}/api/form/delete/${activeId}`,
         {
           method: "DELETE",
         }
