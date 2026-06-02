@@ -1,3 +1,5 @@
+import { BASE_URL } from "@/config/api";
+
 export const isAuthenticated = () => {
   if (typeof window === "undefined") return false;
 
@@ -15,7 +17,7 @@ export const isUser = () => getUserType() === "user";
 
 export const loginAdmin = async (username: string, password: string) => {
   try {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch(`${BASE_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
